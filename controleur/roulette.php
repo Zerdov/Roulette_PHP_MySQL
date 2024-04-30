@@ -1,9 +1,13 @@
 <?php
-include_once "$racine/modele/bd.logs.inc.php";
+include_once "$racine/modele/bd.classes.inc.php";
+include_once "$racine/modele/bd.utilisateurs.inc.php";
+include_once "$racine/modele/bd.notes.inc.php";
 
-$Logs=new Logs();
+$Classe=new Classe();
+$Utilisateur=new Utilisateur();
+$Note=new Note();
 
-$liste_classes = $Logs->addAction("CLasse", "getClasses", [""], "Lectures des classes", "read")['result'];
+$liste_classes=$Classe->getClasses(); 
 
 if(isset($_POST['reset_opt']) && isset($_POST['choix_classe'])){
     $options=$_POST['reset_opt'];
@@ -11,20 +15,20 @@ if(isset($_POST['reset_opt']) && isset($_POST['choix_classe'])){
     foreach($idC as $u){
         foreach($options as $v){
             if($v==="reset_passages"){
-                $Logs->addAction("Utilisateur", "resetStatutUtilisateurByIdC", [$u], "Reset des passages de la classe d'id ".$u, "update");
+                $Utilisateur->resetStatutU($u);
             }
             if($v==="reset_notes"){
-                $Logs->addAction("Note", "resetNotesByIdC", [$u], "Reset des notes de la classe d'id ".$u, "delete");
+                $Note->resetNotesByIdC($u);
             }
         }
     }
-} 
+}
 
 $utilisateurs=[];
 
 foreach ($liste_classes as $v) {
-    $utilisateursNonPasses = $Logs->addAction('Utilisateur', 'getUtilisateursNonPassByIdC', [$v['idC']], "Lecture des utilisateurs non passés de la classe d'id ".$v['idC'], "read")['result'];
-    $utilisateursPasses = $Logs->addAction('Utilisateur', 'getUtilisateursPassByIdC', [$v['idC']], "Lecture des utilisateurs passés de la classe d'id ".$v['idC'], "read")['result'];
+    $utilisateursNonPasses = $Utilisateur->getUtilisateursNonPassByIdC($v['idC']);
+    $utilisateursPasses = $Utilisateur->getUtilisateursPassByIdC($v['idC']);
     $utilisateurs[$v['libelleC']] = [
         'Non Passés' => $utilisateursNonPasses,
         'Passés' => $utilisateursPasses,

@@ -1,18 +1,19 @@
 <?php
 
 function controleurPrincipal($action) {
-    $lesActions = [];
+    $lesActions = array();
     $lesActions["accueil"] = "roulette.php";
     $lesActions["detail"] = "detail.php";
-    $lesActions["tire"] = "eleveTire.php";
-    $lesActions["envoie"] = "envoieNote.php";
+    $lesActions["tire"] = "eleve_tire.php";
+    $lesActions["envoie"] = "envoie_note.php";
     $lesActions["erreur"] = "erreur.php";
 
-    $result = $lesActions["accueil"];
     if (array_key_exists($action, $lesActions)) {
-        $result = $lesActions[$action];
+        return $lesActions[$action];
+    } 
+    else {
+        return $lesActions["accueil"];
     }
-    return $result;
 }
 
 ?>

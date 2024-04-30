@@ -52,8 +52,9 @@ class Note extends Connecteur{
         try{
             $req=$this->conn->prepare("DELETE FROM notes WHERE idU IN (SELECT idU FROM utilisateurs WHERE idC = :idC)");
             $req->bindValue(':idC', $idC, PDO::PARAM_INT);
-            $resultat=$req->execute();
-         
+            $req->execute();
+
+            $resulat=1;           
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage();
             die();

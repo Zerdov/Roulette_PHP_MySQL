@@ -1,12 +1,12 @@
 <?php
 if (isset($_POST['note']) && isset($_GET['idU'])){
-    include_once "$racine/modele/bd.logs.inc.php";
+    include_once "$racine/modele/bd.notes.inc.php";
 
-    $Logs=new Logs();
+    $Note=new Note();
     
     $note=$_POST['note'];
     $idU=$_GET['idU'];
-    $Logs->addAction("Note", "addNote", [$note, $idU], "Ajout de la note ".$note." à l'utilisateur d'id ".$idU, "create");
+    $Note->addNote($note,$idU);
 
     $title="Confirmé";
     include_once "$racine/vue/entete.html.php";

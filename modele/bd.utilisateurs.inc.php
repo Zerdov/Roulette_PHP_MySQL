@@ -64,10 +64,11 @@ class Utilisateur extends Connecteur{
         return $resultat;
     }
 
-    function updateStatusU($idU){
+    function updateStatutU($idU, $idC){
         try {
-            $req = $this->conn->prepare("UPDATE utilisateurs SET passageU=1 WHERE idU=:idU");
+            $req = $this->conn->prepare("UPDATE utilisateurs SET passageU=1 WHERE idU=:idU AND idC=:idC");
             $req->bindParam(":idU",$idU, PDO::PARAM_INT);
+            $req->bindParam(":idC",$idC, PDO::PARAM_INT);
 
             $resultat=$req->execute();
         } catch (PDOException $e) {
@@ -77,7 +78,7 @@ class Utilisateur extends Connecteur{
         return $resultat;
     }
 
-    function resetStatutUtilisateurByIdC($idC){
+    function resetStatutU($idC){
         try{
             $req=$this->conn->prepare("UPDATE utilisateurs SET passageU=0 WHERE idC=:idC");
             $req->bindParam(":idC",$idC, PDO::PARAM_INT);

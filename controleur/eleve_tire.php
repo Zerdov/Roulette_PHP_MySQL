@@ -1,11 +1,14 @@
 <?php
 if (isset($_POST['choix_classe'])){
-    include_once "$racine/modele/bd.logs.inc.php";
-    $Logs = new Logs();
+    include_once "$racine/modele/bd.utilisateurs.inc.php";
+    include_once "$racine/modele/bd.notes.inc.php";
+
+    $Utilisateur=new Utilisateur();
+    $Note=new Note();
 
     $idC=$_POST['choix_classe'];
-    $random = $Logs->addAction("Utilisateur", "getRandomUtilisateurByIdC", [$idC], "Lecture d'un utilisateur tiré au hasard de la classe d'id ".$idC, "read")['result'];
-    $Logs->addAction("Utilisateur", "updateStatusU", [$random['idU']], "Update du satus de l'utilisateur d'id ".$random['idU'], "update");
+    $random=$Utilisateur->getRandomUtilisateurByIdC($idC);
+    $Utilisateur->updateStatutU($random['idU'],$idC);
 
     $title="Utilisateur tiré";
     include_once "$racine/vue/entete.html.php";
