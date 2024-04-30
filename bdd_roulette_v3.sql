@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 16 Janvier 2024 à 13:16
+-- Généré le :  Mar 30 Avril 2024 à 07:40
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `bdd_roulette_v1`
+-- Base de données :  `bdd_roulette_v3`
 --
 
 -- --------------------------------------------------------
@@ -79,7 +79,7 @@ INSERT INTO `utilisateurs` (`idU`, `nomU`, `prenomU`, `passageU`, `idC`) VALUES
 (6, 'Chateau', 'Clément', 0, 1),
 (7, 'Delafaite', 'Nathan', 0, 1),
 (8, 'Gadroy', 'Léo', 0, 1),
-(9, 'Gérard', 'David', 0, 1),
+(9, 'Gérard', 'David', 1, 1),
 (10, 'Malherbe', 'Arthur', 0, 1),
 (11, 'Mao', 'Pauline', 0, 1),
 (12, 'Nouvian', 'Pierre-Loup', 0, 1),
@@ -87,13 +87,13 @@ INSERT INTO `utilisateurs` (`idU`, `nomU`, `prenomU`, `passageU`, `idC`) VALUES
 (14, 'Ponsin', 'Flavien', 0, 1),
 (15, 'Senhadji', 'Hamza', 0, 1),
 (16, 'Turquier', 'Victor', 0, 1),
-(17, 'Sellier', 'Luka', 0, 2),
-(18, 'Kreir', 'Yanis', 0, 2),
-(19, 'Hubert', 'Léa', 0, 2),
+(17, 'Aubriet', 'Aurélien', 0, 2),
+(18, 'Barial', 'Benjamin', 0, 2),
+(19, 'De Lange', 'Aymeric', 0, 2),
 (20, 'Guillaume', 'Corentin', 0, 2),
-(21, 'De Lange', 'Aymeric', 0, 2),
-(22, 'Barial', 'Benjamin', 0, 2),
-(23, 'Aubriet', 'Aurélien', 0, 2),
+(21, 'Hubert', 'Léa', 0, 2),
+(22, 'Kreir', 'Yanis', 0, 2),
+(23, 'Sellier', 'Luka', 0, 2),
 (24, 'Vandendrich', 'Bryan', 0, 2),
 (25, 'Willig', 'Jules', 0, 2),
 (26, 'Wintrebert', 'Mathéo', 0, 2);
@@ -135,7 +135,7 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT pour la table `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `idN` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idN` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
