@@ -1,0 +1,20 @@
+RewriteEngine On
+
+RewriteRule ^accueil$ ?action=accueil [L]
+RewriteRule ^detail-([0-9]+)$ ?action=detail&idU=$1 [L]
+RewriteRule ^random$ ?action=tire [L]
+RewriteRule ^confirmation-([0-9]+)$ ?action=envoie&idU=$1 [L]
+
+
+<FilesMatch "index\.php">
+    Allow from all
+</FilesMatch>
+
+<FilesMatch ".env">
+    Deny from all
+</FilesMatch>
+
+# Renvoie vers index.php qui appelle le controleur principal qui lui va appeler le controleur erreur.php
+ErrorDocument 403 /Roulette_v1/?action=erreur&cause=403
+ErrorDocument 404 /Roulette_v1/?action=erreur&cause=404
+ErrorDocument 500 /Roulette_v1/?action=erreur&cause=500
