@@ -22,5 +22,6 @@ Votre mission Vous réaliserez ce projet avec les bonnes pratiques que vous avez
 - Modélisation des données
 - Patron de conception : POO / MVC
 
-## E5
-Enregistrer les tentatives de log réussites
+## Rajouts
+- Système d'authentification (Compte Professeur / Étudiant)
+- Possibilité si compte Professeur de supprimer certaines notes d'un étudiants en AJAX

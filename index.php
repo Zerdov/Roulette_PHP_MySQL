@@ -1,15 +1,18 @@
 <?php
-include "getRacine.php";
-include "$racine/controleur/controleurPrincipal.php";
+include_once "getRacine.php";
+include_once "$racine/controleur/controleurPrincipal.php";
 
 if (isset($_GET["action"])) {
     $action = $_GET["action"];
-} 
-else {
-    $action = "defaut";
+} elseif (isset($_POST["action"])) {
+    $action = $_POST["action"];
+} else {
+    $action = "login";
 }
 
-$fichier = controleurPrincipal($action);
-include "$racine/controleur/$fichier";
+$define = controleurPrincipal($action);
+$header = $define["header"];
+$fichier = $define["action"];
+include_once "$racine/controleur/$fichier";
 ?>
      

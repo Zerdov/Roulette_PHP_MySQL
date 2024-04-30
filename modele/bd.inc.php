@@ -16,7 +16,7 @@ class Connecteur{
     }
 
     public function __toString(){
-        $txt=$this->env['USER'].' '.$this->env['PASSWORD'].' '.$this->env['DB'].' '.$this->env['SERVER'].' ';
+        $txt=$this->login.' '.$this->mdp.' '.$this->bd.' '.$this->serveur.' ';
         return $txt;
     }
 }

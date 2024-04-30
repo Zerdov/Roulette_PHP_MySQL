@@ -2,13 +2,13 @@
 
 include_once "bd.inc.php";
 
-class Utilisateur extends Connecteur{
+class Eleve extends Connecteur{
 
-    function getUtilisateurByIdU($idU){
+    function getEleveByIdE($idE){
         $resultat=[];
         try {
-            $req = $this->conn->prepare("SELECT * FROM utilisateurs WHERE idU=:idU");
-            $req->bindParam(":idU",$idU, PDO::PARAM_INT);
+            $req = $this->conn->prepare("SELECT * FROM eleves WHERE idE=:idE");
+            $req->bindParam(":idE",$idE, PDO::PARAM_INT);
 
             $req->execute();
             $resultat = $req->fetch(PDO::FETCH_ASSOC);
@@ -19,25 +19,10 @@ class Utilisateur extends Connecteur{
         return $resultat;
     }
 
-    function getUtilisateurByNomU($nomU){
+    function getElevesNonPassByIdC($classe){
         $resultat=[];
         try {
-            $req = $this->conn->prepare("SELECT * FROM utilisateurs WHERE nomU=:nomU");
-            $req->bindParam(":nomU",$nomU, PDO::PARAM_STR);
-
-            $req->execute();
-            $resultat = $req->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            print "Erreur !: " . $e->getMessage();
-            die();
-        }
-        return $resultat;
-    }
-
-    function getUtilisateursNonPassByIdC($classe){
-        $resultat=[];
-        try {
-            $req = $this->conn->prepare("SELECT utilisateurs.* FROM utilisateurs INNER JOIN classes ON utilisateurs.idC=classes.idC WHERE passageU=0 AND classes.idC=:idC ORDER BY utilisateurs.nomU");
+            $req = $this->conn->prepare("SELECT eleves.* FROM eleves INNER JOIN classes ON eleves.idC=classes.idC WHERE passageE=0 AND classes.idC=:idC");
             $req->bindParam(":idC",$classe, PDO::PARAM_INT);
 
             $req->execute();
@@ -49,10 +34,10 @@ class Utilisateur extends Connecteur{
         return $resultat;
     }
 
-    function getUtilisateursPassByIdC($classe){
+    function getElevesPassByIdC($classe){
         $resultat=[];
         try {
-            $req = $this->conn->prepare("SELECT utilisateurs.* FROM utilisateurs INNER JOIN classes ON utilisateurs.idC=classes.idC WHERE passageU=1 AND classes.idC=:idC ORDER BY utilisateurs.nomU");
+            $req = $this->conn->prepare("SELECT eleves.* FROM eleves INNER JOIN classes ON eleves.idC=classes.idC WHERE passageE=1 AND classes.idC=:idC");
             $req->bindParam(":idC",$classe, PDO::PARAM_INT);
 
             $req->execute();
@@ -64,10 +49,10 @@ class Utilisateur extends Connecteur{
         return $resultat;
     }
 
-    function getRandomUtilisateurByIdC($classe){
+    function RandomEleveByIdC($classe){
         $resultat=[];
         try {
-            $req = $this->conn->prepare("SELECT utilisateurs.*, classes.libelleC FROM utilisateurs INNER JOIN classes ON utilisateurs.idC=classes.idC WHERE utilisateurs.passageU=0 AND classes.idC=:idC ORDER BY RAND() LIMIT 1");
+            $req = $this->conn->prepare("SELECT eleves.*, libelleC FROM eleves INNER JOIN classes ON eleves.idC=classes.idC WHERE eleves.passageE=0 AND classes.idC=:idC ORDER BY RAND() LIMIT 1");
             $req->bindParam(":idC",$classe, PDO::PARAM_INT);
 
             $req->execute();
@@ -79,10 +64,10 @@ class Utilisateur extends Connecteur{
         return $resultat;
     }
 
-    function updateStatutU($idU, $idC){
+    function updateStatutE($idE, $idC){
         try {
-            $req = $this->conn->prepare("UPDATE utilisateurs SET passageU=1 WHERE idU=:idU AND idC=:idC");
-            $req->bindParam(":idU",$idU, PDO::PARAM_INT);
+            $req = $this->conn->prepare("UPDATE eleves SET passageE = 1 WHERE idE=:idE AND idC=:idC");
+            $req->bindParam(":idE",$idE, PDO::PARAM_INT);
             $req->bindParam(":idC",$idC, PDO::PARAM_INT);
 
             $resultat=$req->execute();
@@ -93,9 +78,9 @@ class Utilisateur extends Connecteur{
         return $resultat;
     }
 
-    function resetStatutU($idC){
+    function resetStatutE($idC){
         try{
-            $req=$this->conn->prepare("UPDATE utilisateurs SET passageU=0 WHERE idC=:idC");
+            $req=$this->conn->prepare("UPDATE eleves SET passageE=0 WHERE idC=:idC");
             $req->bindParam(":idC",$idC, PDO::PARAM_INT);
 
             $resultat=$req->execute();
