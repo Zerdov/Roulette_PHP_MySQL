@@ -10,8 +10,8 @@ if(isset($_POST['nomU']) && isset($_POST['mdpU'])) {
     $mdpU="";
 }
 
-$auth=new Authentification($nomU, $mdpU);
-$auth->login();
+$Auth=new Authentification($nomU, $mdpU);
+$Auth->login();
 
 if(isLoggedOn()) {
     include_once "$racine/modele/bd.utilisateurs.inc.php";
