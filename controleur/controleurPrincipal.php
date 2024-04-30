@@ -4,8 +4,8 @@ function controleurPrincipal($action) {
     $lesActions = [];
     $lesActions["accueil"] = "roulette.php";
     $lesActions["detail"] = "detail.php";
-    $lesActions["tire"] = "eleveTire.php";
-    $lesActions["envoie"] = "envoieNote.php";
+    $lesActions["tire"] = "eleve_tire.php";
+    $lesActions["envoie"] = "envoie_note.php";
     $lesActions["erreur"] = "erreur.php";
 
     $result = $lesActions["accueil"];
